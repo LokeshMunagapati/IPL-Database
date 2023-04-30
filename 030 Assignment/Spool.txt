@@ -1,0 +1,291 @@
+SQL>  create table Team (
+  2  team_id INT PRIMARY KEY,
+  3  team_name VARCHAR(50) NOT NULL
+  4  );
+
+Table created.
+
+SQL> Insert into Team( team_id, team_name) values
+  2  (1, 'Mumbai Indians'),
+  3  (2, 'Chennai Super Kings'),
+  4  (3, 'Royal Challengers Bangalore'),
+  5  (4, 'Kolkata Knight Riders');
+(1, 'Mumbai Indians'),
+                     *
+ERROR at line 2:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> Insert into Team( team_id, team_name) values
+  2  (1, 'Mumbai Indians'),
+  3  (2, 'Chennai Super Kings'),
+  4  (3, 'Royal Challengers Bangalore'),
+  5  (4, 'Kolkata Knight Riders');
+(1, 'Mumbai Indians'),
+                     *
+ERROR at line 2:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> 
+SQL> Insert into Team values
+  2  (1, 'Mumbai Indians'),
+  3  (2, 'Chennai Super Kings'),
+  4  (3, 'Royal Challengers Bangalore'),
+  5  (4, 'Kolkata Knight Riders');
+(1, 'Mumbai Indians'),
+                     *
+ERROR at line 2:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> insert into Team values(1,'Mumbai Indians');
+
+1 row created.
+
+SQL> insert into Team values(&team_id,'&team_name');
+Enter value for team_id: 2
+Enter value for team_name: Chennai Super Kings
+old   1: insert into Team values(&team_id,'&team_name')
+new   1: insert into Team values(2,'Chennai Super Kings')
+
+1 row created.
+
+SQL> /
+Enter value for team_id: 3
+Enter value for team_name: Royal Challengers Bangalore
+old   1: insert into Team values(&team_id,'&team_name')
+new   1: insert into Team values(3,'Royal Challengers Bangalore')
+
+1 row created.
+
+SQL> /
+Enter value for team_id: 4
+Enter value for team_name: Kolkata Knight Riders
+old   1: insert into Team values(&team_id,'&team_name')
+new   1: insert into Team values(4,'Kolkata Knight Riders')
+
+1 row created.
+
+SQL> create table Match_Score(
+  2  match_id INT PRIMARY KEY,
+  3  team_id INT NOT NULL,
+  4  opponent_id INT NOT NULL,
+  5  date DATE NOT NULL,
+  6  score INT NOT NULL,
+  7  FOREIGN KEY( team_id) REFERENCES Team(team_id)
+  8  );
+date DATE NOT NULL,
+*
+ERROR at line 5:
+ORA-00904: : invalid identifier 
+
+
+SQL> create table Match_Score(
+  2  match_id INT PRIMARY KEY,
+  3  team_id INT NOT NULL,
+  4  opponent_id INT NOT NULL,
+  5  day DATE NOT NULL,
+  6  score INT NOT NULL,
+  7  FOREIGN KEY( team_id) REFERENCES Team(team_id)
+  8  );
+
+Table created.
+
+SQL> CREATE TABLE Team_Wins (
+  2    team_id INT NOT NULL,
+  3    year INT NOT NULL,
+  4    no_of_wins INT NOT NULL,
+  5    PRIMARY KEY (team_id, year),
+  6    FOREIGN KEY (team_id) REFERENCES Team(team_id)
+  7  );
+
+Table created.
+
+SQL> Insert into Match_Score values(1, 1, 2, '2022-04-10', 157);
+Insert into Match_Score values(1, 1, 2, '2022-04-10', 157)
+                                        *
+ERROR at line 1:
+ORA-01861: literal does not match format string 
+
+
+SQL> Insert into Match_Score values(1, 1, 2, '10-04-2022', 157);
+Insert into Match_Score values(1, 1, 2, '10-04-2022', 157)
+                                        *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> Insert into Match_Score values(1, 1, 2, '2022-10-4', 157);
+Insert into Match_Score values(1, 1, 2, '2022-10-4', 157)
+                                        *
+ERROR at line 1:
+ORA-01861: literal does not match format string 
+
+
+SQL> Insert into Match_Score values(1, 1, 2, '2022/10/4', 157);
+Insert into Match_Score values(1, 1, 2, '2022/10/4', 157)
+                                        *
+ERROR at line 1:
+ORA-01861: literal does not match format string 
+
+
+SQL> Insert into Match_Score values(1, 1, 2, '2022-10-04', 157);
+Insert into Match_Score values(1, 1, 2, '2022-10-04', 157)
+                                        *
+ERROR at line 1:
+ORA-01861: literal does not match format string 
+
+
+SQL> Insert into Match_Score values(1, 1, 2,2022-10-04, 157);
+Insert into Match_Score values(1, 1, 2,2022-10-04, 157)
+                                              *
+ERROR at line 1:
+ORA-00932: inconsistent datatypes: expected DATE got NUMBER 
+
+
+SQL> Insert into Match_Score values(1, 1, 2,'2022-10-04', 157);
+Insert into Match_Score values(1, 1, 2,'2022-10-04', 157)
+                                       *
+ERROR at line 1:
+ORA-01861: literal does not match format string 
+
+
+SQL> Insert into Match_Score values(1, 1, 2,"2022-10-04", 157);
+Insert into Match_Score values(1, 1, 2,"2022-10-04", 157)
+                                       *
+ERROR at line 1:
+ORA-00984: column not allowed here 
+
+
+SQL> Insert into Match_Score values(1, 1, 2,'04-10-2022', 157);
+Insert into Match_Score values(1, 1, 2,'04-10-2022', 157)
+                                       *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> Insert into Match_Score values(1, 1, 2,'04-06-2022', 157);
+Insert into Match_Score values(1, 1, 2,'04-06-2022', 157)
+                                       *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> Insert into Match_Score values(1, 1, 2,'2022-04-10', 157);
+Insert into Match_Score values(1, 1, 2,'2022-04-10', 157)
+                                       *
+ERROR at line 1:
+ORA-01861: literal does not match format string 
+
+
+SQL> Insert into Match_Score values(1, 1, 2,'10-04-2022', 157);
+Insert into Match_Score values(1, 1, 2,'10-04-2022', 157)
+                                       *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> Insert into Match_Score values(1, 1, 2,'10/04/2022', 157);
+Insert into Match_Score values(1, 1, 2,'10/04/2022', 157)
+                                       *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> Insert into Match_Score values(1, 1, 2,'10/4/2022', 157);
+Insert into Match_Score values(1, 1, 2,'10/4/2022', 157)
+                                       *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> Insert into Match_Score values(1, 1, 2,'10-4-2022', 157);
+Insert into Match_Score values(1, 1, 2,'10-4-2022', 157)
+                                       *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> Insert into Match_Score values(1, 1, 2,'10-April-2022', 157);
+
+1 row created.
+
+SQL> Insert into Match_Score values(2, 2, 1,'10-April-2022', 158);
+
+1 row created.
+
+SQL> Insert into Match_Score values(3, 3, 4,'11-April-2022', 141);
+
+1 row created.
+
+SQL> Insert into Match_Score values(4,4,3,'11-April-2022', 146);
+
+1 row created.
+
+SQL> Insert into Team_Wins values(1, 2021, 6);
+
+1 row created.
+
+SQL> Insert into Team_Wins values(1, 2022, 4);
+
+1 row created.
+
+SQL> Insert into Team_Wins values(2, 2021,5);
+
+1 row created.
+
+SQL> Insert into Team_Wins values(2, 2022,3);
+
+1 row created.
+
+SQL> Insert into Team_Wins values(3, 2021,3);
+
+1 row created.
+
+SQL> Insert into Team_Wins values(3, 2022,2);
+
+1 row created.
+
+SQL> Insert into Team_Wins values(4, 2021,2);
+
+1 row created.
+
+SQL> Insert into Team_Wins values(4, 2022,1);
+
+1 row created.
+
+SQL> select * from Team;
+
+   TEAM_ID TEAM_NAME                                                            
+---------- --------------------------------------------------                   
+         1 Mumbai Indians                                                       
+         2 Chennai Super Kings                                                  
+         3 Royal Challengers Bangalore                                          
+         4 Kolkata Knight Riders                                                
+
+SQL> select * from Match_Score;
+
+  MATCH_ID    TEAM_ID OPPONENT_ID DAY            SCORE                          
+---------- ---------- ----------- --------- ----------                          
+         1          1           2 10-APR-22        157                          
+         2          2           1 10-APR-22        158                          
+         3          3           4 11-APR-22        141                          
+         4          4           3 11-APR-22        146                          
+
+SQL> select * from Team_Wins;
+
+   TEAM_ID       YEAR NO_OF_WINS                                                
+---------- ---------- ----------                                                
+         1       2021          6                                                
+         1       2022          4                                                
+         2       2021          5                                                
+         2       2022          3                                                
+         3       2021          3                                                
+         3       2022          2                                                
+         4       2021          2                                                
+         4       2022          1                                                
+
+8 rows selected.
+
+SQL> spool off

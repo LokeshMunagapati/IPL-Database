@@ -1,0 +1,3 @@
+ABSTRACT :
+
+The IPL database is a relational database that includes information about cricket matches played in the Indian Premier League (IPL) tournament. This database includes two main entities: `Team` and `Match Score`. The `Team` entity represents each team that participates in the IPL tournament, and the `Match Score` entity represents the score for each match played between two teams. Additionally, the database includes a `Team Wins` entity that represents the number of wins per team in a particular year. An ER diagram was created to represent the relationship between these entities, and SQL statements were used to create tables for the database and insert test examples.
